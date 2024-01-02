@@ -1,40 +1,70 @@
 import React from "react";
-import "./Slider.css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper/core";
+import { Autoplay, Parallax, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/parallax";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./Slider.css";
+
 import Image1 from "../images/img1.jpg";
 import Image2 from "../images/img2.jpg";
 import Image3 from "../images/img3.jpg";
 
-function Slider() {
+SwiperCore.use([Autoplay, Parallax, Pagination, Navigation]);
+
+export default function Slider() {
   return (
     <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
-      autoplay={true}
+      style={{
+        "--swiper-navigation-color": "#fff",
+        "--swiper-pagination-color": "#fff",
+      }}
+      speed={600}
+      parallax={true}
+      autoplay={{
+        delay: 3000, // Delay between transitions in milliseconds
+        disableOnInteraction: false, // Autoplay will not be disabled after user interactions
+      }}
+      pagination={{
+        clickable: true,
+      }}
+      navigation={true}
+      className="mySwiper"
     >
       <SwiperSlide>
-        <img src={Image1} alt="Image1" />
+        <div
+          className="parallax-bg"
+          data-swiper-parallax="-300"
+          style={{
+            backgroundImage: `url(${Image1})`,
+          }}
+        >
+          <p data-swiper-parallax="-100">Content for the first slide</p>
+        </div>
       </SwiperSlide>
       <SwiperSlide>
-        <img src={Image2} alt="Image2" />
+        <div
+          className="parallax-bg"
+          data-swiper-parallax="-300"
+          style={{
+            backgroundImage: `url(${Image2})`,
+          }}
+        >
+          <p data-swiper-parallax="-100">Content for the second slide</p>
+        </div>
       </SwiperSlide>
       <SwiperSlide>
-        <img src={Image3} alt="Image3" />
+        <div
+          className="parallax-bg"
+          data-swiper-parallax="-300"
+          style={{
+            backgroundImage: `url(${Image3})`,
+          }}
+        >
+          <p data-swiper-parallax="-100">Content for the third slide</p>
+        </div>
       </SwiperSlide>
-      <SwiperSlide>
-        <img src={Image2} alt="Image2" />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img src={Image3} alt="Image3" />
-      </SwiperSlide>
-      ...
     </Swiper>
   );
 }
-
-export default Slider;
